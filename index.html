@@ -1,102 +1,129 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>喫茶ことほぎ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      background: #fffaf6;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 40px 20px;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 10px;
-    }
-    .menu-item {
-      margin-bottom: 10px;
-    }
-    .event {
-      margin-bottom: 20px;
-    }
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喫茶ことほぎ</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #fffaf6;
+  color: #333;
+}
+
+/* ロゴ */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  z-index: 10;
+}
+
+/* ナビ */
+nav {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-bottom: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.6;
+}
+
+/* メイン */
+main {
+  margin-left: 200px;
+}
+
+/* KV */
+.kv {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* セクション */
+section {
+  padding: 80px 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>喫茶ことほぎ</h1>
-  <p>いらっしゃいませ！『喫茶ことほぎ』へようこそ！</p>
-  <p>開催期間：〇月〇日〜〇月〇日</p>
-</header>
+<!-- ロゴ -->
+<img src="images/logo.png" class="logo">
 
-<section>
-  <h2>メニュー</h2>
+<!-- ナビ -->
+<nav>
+  <ul>
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="menu.html">フード</a></li>
+    <li><a href="goods.html">グッズ</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="#">M3特設</a></li>
+  </ul>
+</nav>
 
-  <h3>フード</h3>
-  <p class="menu-item">うかのよくばりオムライス　¥2,200(税込)</p>
-  <p class="menu-item">いとのおすすめナポリタン　¥2,200(税込)</p>
-  <p class="menu-item">2人のまかないピザトースト　¥1,200(税込)</p>
+<!-- メイン -->
+<main>
 
-  <h3>デザート</h3>
-  <p class="menu-item">召し上がれパンケーキ　¥1,800(税込)</p>
-  <p class="menu-item">いとおかしプリンアラモード　¥1,600(税込)</p>
+  <!-- KV -->
+  <img src="images/kv.png" class="kv">
 
-  <h3>ドリンク</h3>
-  <p class="menu-item">サボっちゃえクリームソーダ　¥1,200(税込)</p>
-  <p class="menu-item">ドタバタ?! 珈琲フロート　¥1,200(税込)</p>
-</section>
+  <!-- テキスト -->
+  <section>
+    <h1>喫茶ことほぎ</h1>
+    <p>いらっしゃいませ！『喫茶ことほぎ』へようこそ！</p>
+    <p>開催期間：〇月〇日〜〇月〇日</p>
+  </section>
 
-<section>
-  <h2>グッズ</h2>
-  <p>※画像をここに入れる</p>
-</section>
+</main>
 
-<section>
-  <h2>イベント情報</h2>
+<script>
+const sections = document.querySelectorAll("section");
 
-  <div class="event">
-    <strong>4/26(日) 17:30-19:00</strong><br>
-    入場開始 17:00<br>
-    3500円(税込3850円)<br>
-    内容：みんなでご飯／楽曲鑑賞／ビンゴ大会
-  </div>
-
-  <div class="event">
-    <strong>5/3(日) 13:00-15:00</strong><br>
-    入場開始 17:00<br>
-    4000円(税込4400円)<br>
-    内容：ご飯／歌唱／ビンゴ大会（2ショット撮影）
-  </div>
-
-  <p>※1ドリンク1フード必須</p>
-  <p>※特典：オリジナルドリップコーヒー</p>
-</section>
-
-<section>
-  <h2>アクセス</h2>
-  <p>Riverbed in Otherworld</p>
-  <p>JR山手線 駒込駅 北口より徒歩10分</p>
-
-  <iframe src="https://www.google.com/maps?q=35.7406255,139.7446361&output=embed"></iframe>
-</section>
+window.addEventListener("scroll", () => {
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      section.classList.add("show");
+    }
+  });
+});
+</script>
 
 </body>
 </html>
