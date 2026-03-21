@@ -95,4 +95,76 @@ main {
 .kv-sp {
   display: none;
   width: calc(100% - 260px);
-```
+  object-fit: cover;
+}
+
+/* スマホ切り替え */
+@media (max-width: 768px) {
+
+  nav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  main {
+    margin-left: 0;
+  }
+
+  .kv-pc {
+    display: none;
+  }
+
+  .kv-sp {
+    display: block;
+    width: 100%;
+  }
+
+  .access {
+    position: static;
+    margin-top: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 左パネル -->
+<nav>
+  <div>
+    <img src="logo.png" class="logo">
+
+    <ul>
+      <li><a href="index.html">TOP</a></li>
+      <li><a href="menu.html">フード</a></li>
+      <li><a href="goods.html">グッズ</a></li>
+      <li><a href="event.html">イベント</a></li>
+      <li><a href="#">M3特設</a></li>
+    </ul>
+  </div>
+
+  <div class="access">
+    <strong>◆アクセス</strong><br>
+    Riverbed in Otherworld<br>
+    <a href="https://google.com/maps/place/オレンジペコ/@35.740634,139.744645,17z/data=!4m6!3m5!1s0x60188d9034945435:0x81edcc2d2bc92e49!8m2!3d35.7406255!4d139.7446361!16s%2Fg%2F1tgpn0bn" target="_blank" style="color:#fff;">
+      地図はこちら
+    </a><br>
+    JR山手線 駒込駅 北口より徒歩10分
+  </div>
+</nav>
+
+<!-- メイン -->
+<main>
+
+  <!-- KV -->
+  <img src="kv_pc.png" class="kv kv-pc">
+  <img src="kv_sp.png" class="kv kv-sp">
+
+</main>
+
+</body>
+</html>
