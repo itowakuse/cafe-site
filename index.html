@@ -89,21 +89,32 @@ section.show {
   max-width: 260px;
 }
 
-/* PC用（そのまま） */
+/* 共通 */
 .kv {
   width: 100%;
   height: 100vh;
-  object-fit: cover;
-  object-position: center top;
-  transform: scale(1.05);
 }
 
-/* スマホ用 */
+/* PC用 */
+.kv-pc {
+  display: block;
+  object-fit: cover;
+}
+
+/* スマホ用（最初は非表示） */
+.kv-sp {
+  display: none;
+  object-fit: cover;
+}
+
+/* スマホのときだけ切り替え */
 @media (max-width: 768px) {
-  .kv {
-    object-fit: contain;
-    transform: scale(1);
-    background: #f6efe7;
+  .kv-pc {
+    display: none;
+  }
+
+  .kv-sp {
+    display: block;
   }
 }
 </style>
@@ -129,7 +140,8 @@ section.show {
 <main>
 
   <!-- KV -->
-  <img src="kv.png" class="kv">
+ <img src="kv_pc.png" class="kv kv-pc">
+ <img src="kv_sp.png" class="kv kv-sp">
 
   <!-- テキスト -->
 
