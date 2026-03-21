@@ -88,6 +88,24 @@ section.show {
   font-size: 12px;
   max-width: 260px;
 }
+
+/* PC用（そのまま） */
+.kv {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.05);
+}
+
+/* スマホ用 */
+@media (max-width: 768px) {
+  .kv {
+    object-fit: contain;
+    transform: scale(1);
+    background: #f6efe7;
+  }
+}
 </style>
 </head>
 
