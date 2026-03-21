@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喫茶ことほぎ</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f6efe7;
+  color: #333;
+}
+
+/* ロゴ */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  z-index: 10;
+}
+
+/* ナビ */
+nav {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-bottom: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* メイン */
+main {
+  margin-left: 200px;
+}
+
+/* KV */
+.kv {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* セクション */
+section {
+  padding: 80px 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* アクセス固定 */
+.access {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.85);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 12px;
+  max-width: 260px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ロゴ -->
+<img src="logo.png" class="logo">
+
+<!-- ナビ -->
+<nav>
+  <ul>
+    <li><a href="index.html">TOP</a></li>
+    <li><a href="menu.html">フード</a></li>
+    <li><a href="goods.html">グッズ</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="#">M3特設</a></li>
+  </ul>
+</nav>
+
+<!-- メイン -->
+<main>
+
+  <!-- KV -->
+  <img src="kv.png" class="kv">
+
+  <!-- テキスト -->
+  <section>
+    <h1>喫茶ことほぎ</h1>
+    <p>いらっしゃいませ！『喫茶ことほぎ』へようこそ！</p>
+  </section>
+
+</main>
+
+<!-- アクセス（常に表示） -->
+<div class="access">
+  <strong>◆アクセス</strong><br>
+  Riverbed in Otherworld<br>
+  <a href="https://google.com/maps/place/オレンジペコ/@35.740634,139.744645,17z/data=!4m6!3m5!1s0x60188d9034945435:0x81edcc2d2bc92e49!8m2!3d35.7406255!4d139.7446361!16s%2Fg%2F1tgpn0bn" target="_blank">
+    地図はこちら
+  </a><br>
+  JR山手線 駒込駅 北口より徒歩10分
+</div>
+
+<script>
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll", () => {
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      section.classList.add("show");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
