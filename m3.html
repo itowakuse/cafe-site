@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喫茶ことほぎ</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+
+<style>
+
+
+
+/* ================= */
+/* 全体設定リセット */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ================= */
+/* 全体設定 */
+body {
+  margin: 0;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  background: #f6efe7;
+  color: #333;
+}
+
+
+/* ================= */
+/* ハンバーガー全体 - デフォルトは非表示（PC） */
+.menu-btn {
+  display: none;   /* PCでは非表示 */
+  position: fixed;
+  top: 5px;    /* 上の余白を小さく */
+  right: 5px;  /* 右の余白を小さく */
+  width: 60px;   /* 画像サイズに合わせる */
+  height: 60px;
+  cursor: pointer;
+  z-index: 30;    /* メニューより前に表示 */
+}
+
+.hamburger-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ================= */
+/* 左パネル（PC） */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+
+  background: rgba(50, 30, 20, 0.85);
+  backdrop-filter: blur(10px);
+
+  padding: 10px 5px; /* 上下:10px, 左右:5px */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 上寄せ */
+  align-items: center;         /* 横方向中央揃え */
+  padding-top: 100px;           /* 上に少し余白 */
+
+  transition: 0.3s;
+}
+
+.logo {
+  width: 100%;
+  max-width: 100px; /* ナビ幅120pxなら、100pxまで拡大 */
+  display: block;
+  margin-top: 100px;   /* 上余白 */
+  margin-bottom: 100px; /* 下余白 */
+}
+
+/* メニュー */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-bottom: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+/* ================= */
+/* メイン */
+main {
+  width: calc(100% - 220px);  /* ナビを除いた残り幅 */
+  margin-left: 150px;         /* ナビの横幅だけ左にずらす */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* 中の要素を中央揃え */
+  padding: 20px;
+  box-sizing: border-box;     /* パディング込みで幅を計算 */
+}
+
+
+/* ================= */
+/* M3セクション */
+.m3-section {
+  text-align: center;
+  margin: 50px auto;
+}
+
+.m3-video a {
+  font-size: 18px;
+  color: #8B5E3C;
+  text-decoration: underline;
+}
+
+.m3-video p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #5c3a21;
+}
+
+/* 共通設定 */
+.m3-jackets {
+  text-align: center;      /* 中の要素を中央揃え */
+  margin: 20px auto;       /* 上下余白 */
+}
+
+.m3-jackets p {
+  margin-bottom: 15px;
+  font-size: 16px;         /* 〘EP販売中〙の文字サイズ */
+}
+
+.m3-jackets a {
+  display: inline-block;   /* 横並びで中央揃え */
+  margin: 0 10px;          /* 画像間の余白 */
+}
+
+.m3-jackets img {
+  width: 250px;            /* スマホ・小さい画像 */
+  max-width: 100%;         /* 幅を画面に合わせる */
+  border-radius: 8px;
+  display: block;
+}
+
+.m3-jackets img:hover {
+  transform: scale(1.05);
+}
+
+
+.m3-video-wrapper {
+  max-width: 1500px;       /* 最大幅 */
+  width: 100%;             /* 画面幅の90%まで */
+  margin: 40px auto;      /* 上下余白＋中央寄せ */
+  text-align: center;     /* テキストも中央揃え */
+}
+
+.m3-video-wrapper iframe {
+  width: 100%;            /* ブロックいっぱいに広げる */
+  height: 1000px;          /* 高さは固定でもOK、下の例はPC向け */
+  border-radius: 8px;
+}
+
+.m3-video-wrapper .ep-note {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #5c3a21;
+}
+
+
+/* ================= */
+/* PC用 */
+@media (min-width: 769px) {
+  .m3-jackets img {
+    width: 450px;           /* PCでは大きめ表示 */
+  }
+}
+
+/* ================= */
+/* スマホ */
+@media (max-width: 768px) {
+
+  /* ハンバーガー表示 */
+  .menu-btn {
+    display: block;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+  }
+
+  /* ナビ初期は隠す */
+  nav {
+    transform: translateX(-100%);
+    width: 70%;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+
+    padding-top: 100px; /* ここを調整 */
+  }
+
+  .logo {
+    margin-top: 80px; /* ここもスマホ用に減らす */
+    margin-bottom: 50px;
+  }
+
+  /* 開いた状態 */
+  nav.active {
+    transform: translateX(0);
+  }
+
+  /* メイン調整 */
+main {
+    margin-left: 0;       /* ナビの余白を消す */
+    width: 100%;          /* 幅いっぱい */
+  }
+
+
+  .m3-video-wrapper iframe {
+    height: 200px;        /* 高さを小さく */
+  }
+
+  .m3-video-wrapper .ep-note {
+    font-size: 14px;
+  }
+
+  .m3-video a {
+    font-size: 16px;       /* M3情報 */
+  }
+  .m3-video p {
+    font-size: 14px;
+  }
+  .m3-jackets {
+    flex-direction: column;  /* 縦並びに */
+    gap: 15px;
+  }
+  .m3-jackets img {
+    width: 80%;             /* 画面幅に応じて縮小 */
+    max-width: 300px;
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ハンバーガー画像 -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <img src="hamburger.png" alt="メニュー" class="hamburger-img">
+</div>
+
+<!-- ナビ -->
+<nav id="nav">
+  <div>
+    <img src="logo.png" class="logo">
+
+   <ul>
+     <li><a href="index.html">TOP</a></li>
+     <li><a href="menu.html">◆ Food</a></li>
+     <li><a href="goods.html">◆ Goods</a></li>
+     <li><a href="event.html">◆ Event</a></li>
+     <li><a href="m3.html">◆ Original song</a></li>
+   </ul>
+  </div>
+
+</nav>
+
+<!-- メイン -->
+<main>
+  <h1>Original song</h1>
+
+<!-- YouTube埋め込み -->
+<div class="m3-video-wrapper">
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/j498AxenKGQ"<!-- この右端のとこに動画IDを入れる(j498AxenKGQ) -->
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+    </div>
+
+    <!-- ジャケット画像 -->
+    <div class="m3-jackets">
+      <p>〘EPの詳細はこちらから〙</p>
+      <a href="https://x.com/shinomiya_uka" target="_blank">
+        <img src="uka_artwork.png" alt="ジャケット1">
+      </a>
+      <a href="https://x.com/wakuse_ito" target="_blank">
+        <img src="ito_artwork.png" alt="ジャケット2">
+      </a>
+    </div>
+  </section>
+</main>
+
+<script>
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

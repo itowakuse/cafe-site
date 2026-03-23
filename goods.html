@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喫茶ことほぎ</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+
+<style>
+
+
+
+/* ================= */
+/* 全体設定リセット */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ================= */
+/* 全体設定 */
+body {
+  margin: 0;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  background: #f6efe7;
+  color: #333;
+}
+
+
+/* ================= */
+/* ハンバーガー全体 - デフォルトは非表示（PC） */
+.menu-btn {
+  display: none;   /* PCでは非表示 */
+  position: fixed;
+  top: 5px;    /* 上の余白を小さく */
+  right: 5px;  /* 右の余白を小さく */
+  width: 60px;   /* 画像サイズに合わせる */
+  height: 60px;
+  cursor: pointer;
+  z-index: 30;    /* メニューより前に表示 */
+}
+
+.hamburger-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ================= */
+/* 左パネル（PC） */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+
+  background: rgba(50, 30, 20, 0.85);
+  backdrop-filter: blur(10px);
+
+  padding: 10px 5px; /* 上下:10px, 左右:5px */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 上寄せ */
+  align-items: center;         /* 横方向中央揃え */
+  padding-top: 100px;           /* 上に少し余白 */
+
+  transition: 0.3s;
+}
+
+.logo {
+  width: 100%;
+  max-width: 100px; /* ナビ幅120pxなら、100pxまで拡大 */
+  display: block;
+  margin-top: 100px;   /* 上余白 */
+  margin-bottom: 100px; /* 下余白 */
+}
+
+/* メニュー */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-bottom: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+/* ================= */
+/* メイン */
+main {
+  width: calc(100% - 220px);  /* ナビを除いた残り幅 */
+  margin-left: 150px;         /* ナビの横幅だけ左にずらす */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* 中の要素を中央揃え */
+  padding: 20px;
+  box-sizing: border-box;     /* パディング込みで幅を計算 */
+}
+
+/* メニュー画像 */
+.menu-img {
+  width: 100%;       /* 画面幅に応じて縮小 */
+  max-width: 1200px; /* 画像最大幅 */
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ギャラリー画像（横並び） */
+.menu-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* 画像間の余白 */
+}
+
+.menu-gallery .menu-img {
+  max-width: 250px; /* ギャラリーはさらに小さめ */
+  margin: 10px;
+}
+
+/* ================= */
+/* スマホ */
+@media (max-width: 768px) {
+
+  /* ハンバーガー表示 */
+  .menu-btn {
+    display: block;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+  }
+
+  /* ナビ初期は隠す */
+  nav {
+    transform: translateX(-100%);
+    width: 70%;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+
+    padding-top: 100px; /* ここを調整 */
+  }
+
+  .logo {
+    margin-top: 80px; /* ここもスマホ用に減らす */
+    margin-bottom: 50px;
+  }
+
+  /* 開いた状態 */
+  nav.active {
+    transform: translateX(0);
+  }
+
+  /* メイン調整 */
+  main {
+    margin-left: 0;
+  }
+
+  /* KV切替 */
+  .kv-pc {
+    display: none;
+  }
+
+  .kv-sp {
+    display: block;
+    width: 100%;      /* これが右端に余白を作ってる原因 */
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+  main {
+    margin-left: 0;       /* ナビの余白を消す */
+    width: 100%;          /* 幅いっぱい */
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- ハンバーガー画像 -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <img src="hamburger.png" alt="メニュー" class="hamburger-img">
+</div>
+
+<!-- ナビ -->
+<nav id="nav">
+  <div>
+    <img src="logo.png" class="logo">
+
+   <ul>
+     <li><a href="index.html">TOP</a></li>
+     <li><a href="menu.html">◆ Food</a></li>
+     <li><a href="goods.html">◆ Goods</a></li>
+     <li><a href="event.html">◆ Event</a></li>
+     <li><a href="m3.html">◆ Original song</a></li>
+   </ul>
+  </div>
+
+</nav>
+
+<!-- メイン -->
+<main>
+  <h1>グッズ</h1>
+
+  <!-- 単体画像 -->
+  <img src="●.png" alt="グッズ" class="menu-img">
+
+  <!-- ギャラリー画像 -->
+  <div class="menu-gallery">
+    <img src="●.png" alt="グッズ2" class="menu-img">
+    <img src="●.png" alt="グッズ3" class="menu-img">
+    <img src="●.png" alt="グッズ4" class="menu-img">
+  </div>
+
+</main>
+
+<script>
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
