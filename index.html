@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>喫茶ことほぎ</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+
+<style>
+
+
+/* ================= */
+/* 全体設定リセット */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ================= */
+/* 全体設定 */
+body {
+  margin: 0;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  background: #f6efe7;
+  color: #333;
+}
+
+
+/* ================= */
+/* ハンバーガー全体 - デフォルトは非表示（PC） */
+.menu-btn {
+  display: none;   /* PCでは非表示 */
+  position: fixed;
+  top: 5px;    /* 上の余白を小さく */
+  right: 5px;  /* 右の余白を小さく */
+  width: 60px;   /* 画像サイズに合わせる */
+  height: 60px;
+  cursor: pointer;
+  z-index: 30;    /* メニューより前に表示 */
+}
+
+.hamburger-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ================= */
+/* 左パネル（PC） */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+
+  background: rgba(50, 30, 20, 0.85);
+  backdrop-filter: blur(10px);
+
+  padding: 10px 5px; /* 上下:10px, 左右:5px */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 上寄せ */
+  align-items: center;         /* 横方向中央揃え */
+  padding-top: 100px;           /* 上に少し余白 */
+
+  transition: 0.3s;
+}
+
+.logo {
+  width: 100%;
+  max-width: 100px; /* ナビ幅120pxなら、100pxまで拡大 */
+  display: block;
+  margin-top: 100px;   /* 上余白 */
+  margin-bottom: 100px; /* 下余白 */
+}
+
+/* メニュー */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  margin-bottom: 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+/* アクセス */
+.access {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  right: 25px;
+
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #fff;
+}
+
+/* ================= */
+/* メイン */
+main {
+  width: calc(100% - 20px);  /* ナビを除いた残り幅 */
+  margin-left: 105px;         /* ナビの横幅だけ左にずらす */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* 中の要素を中央揃え */
+  padding: 20px;
+  box-sizing: border-box;     /* パディング込みで幅を計算 */
+}
+
+/* ================= */
+/* ショップ情報 */
+.shop-info {
+  max-width: 800px;       /* PCは最大800px */
+  width: 90%;             /* スマホでも余白を少し作る */
+  margin: 50px auto 0;    /* 上50px、左右自動で中央寄せ */
+  padding: 30px;
+  background: #fff8f0;
+  border-radius: 8px;
+  text-align: center;      /* 中の文字も中央揃え */
+  box-sizing: border-box;  /* パディング込みで幅を計算 */
+  color: #5c3a21; /* 茶色系に統一 */
+}
+
+.shop-info h2.shop-name {
+  font-size: 32px;       /* ショップ名 */
+  margin-bottom: 10px;
+}
+
+.shop-info p.shop-address {
+  font-size: 16px;       /* 住所 */
+  margin-bottom: 20px; /* 住所と営業時間の間に余白 */
+}
+
+.shop-info p.shop-hours {
+  font-size: 18px;       /* 営業時間 */
+  margin-bottom: 5px;
+}
+
+.shop-info p.shop-hours span.last-order {
+  font-size: 14px; /* ラストオーダーだけ小さく */
+  color: #4b2c18;
+}
+
+.shop-info p.shop-holiday,
+.shop-info p.shop-access {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Googleマップ */
+.shop-info .map {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ================= */
+/* KV画像 */
+.kv {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 画面いっぱい */
+  background-image: url('kv_pc.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 四隅ぼかし */
+.kv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top left, rgba(246,239,231,0.6), transparent 70%),
+    radial-gradient(circle at top right, rgba(246,239,231,0.6), transparent 70%),
+    radial-gradient(circle at bottom left, rgba(246,239,231,0.6), transparent 70%),
+    radial-gradient(circle at bottom right, rgba(246,239,231,0.6), transparent 70%);
+}
+
+.kv-pc {
+  display: block;
+  width: calc(100% - 180px);
+  object-fit: cover;
+}
+
+.kv-sp {
+  display: none;
+  width: calc(100% - 200px);
+  object-fit: cover;
+}
+
+/* ================= */
+/* スマホ */
+@media (max-width: 768px) {
+
+  /* ハンバーガー表示 */
+  .menu-btn {
+    display: block;
+    position: fixed;
+    top: 15px;
+    right: 20px;
+  }
+
+  /* ナビ初期は隠す */
+  nav {
+    transform: translateX(-100%);
+    width: 70%;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+
+    padding-top: 100px; /* ここを調整 */
+  }
+
+  .logo {
+    margin-top: 80px; /* ここもスマホ用に減らす */
+    margin-bottom: 50px;
+  }
+
+  /* 開いた状態 */
+  nav.active {
+    transform: translateX(0);
+  }
+
+  /* メイン調整 */
+  main {
+    margin-left: 0;
+  }
+
+  /* KV切替 */
+  .kv-pc {
+    display: none;
+  }
+
+  .kv-sp {
+    display: block;
+    width: 100%;      /* これが右端に余白を作ってる原因 */
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+  main {
+    margin-left: 0;       /* ナビの余白を消す */
+    width: 100%;          /* 幅いっぱい */
+  }
+}
+
+  /* スマホ用ショップ情報全体の幅調整 */
+  .shop-info {
+    width: 95%;
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  /* 各要素の文字サイズを小さくする */
+  .shop-info h2.shop-name {
+    font-size: 24px;   /* ショップ名 */
+  }
+
+  .shop-info p.shop-address,
+  .shop-info p.shop-holiday,
+  .shop-info p.shop-access {
+    font-size: 14px;   /* 住所・定休日・アクセス */
+  }
+
+  .shop-info p.shop-hours {
+    font-size: 16px;   /* 営業時間 */
+  }
+
+  .shop-info p.shop-hours span.last-order {
+    font-size: 12px;   /* ラストオーダー */
+  }
+}
+
+  /* アクセス */
+  .access {
+    position: static;
+    margin-top: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ハンバーガー画像 -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <img src="hamburger.png" alt="メニュー" class="hamburger-img">
+</div>
+
+<!-- ナビ -->
+<nav id="nav">
+  <div>
+    <img src="logo.png" class="logo">
+
+   <ul>
+     <li><a href="index.html">TOP</a></li>
+     <li><a href="menu.html">◆ Food</a></li>
+     <li><a href="goods.html">◆ Goods</a></li>
+     <li><a href="event.html">◆ Event</a></li>
+     <li><a href="m3.html">◆ Original song</a></li>
+   </ul>
+  </div>
+
+</nav>
+
+<!-- メイン -->
+<main>
+  <!-- KV -->
+  <img src="kv_pc.png" class="kv kv-pc">
+  <img src="kv_sp.png" class="kv kv-sp">
+
+  <!-- お店情報セクション -->
+  <section class="shop-info">
+    <h2 class="shop-name">Riverbed in Otherworld</h2>
+    <p class="shop-address">東京都北区西ケ原1-61-3</p>
+
+    <p class="shop-hours">
+      営業時間 / 12:00～20:00 
+      <span class="last-order">(ラストオーダー 19:00)</span>
+    </p>
+
+    <p class="shop-access">アクセス / JR山手線 駒込駅北口より徒歩10分</p>
+
+  <!-- Googleマップ埋め込み -->
+  <div class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.123456789!2d139.744636!3d35.740625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d9034945435%3A0x81edcc2d2bc92e49!2z44CSMzk5LTAwNjMg5p2x5Lqs6YO95Lit5aSu5Yy65LiK55Sw5Yy6!5e0!3m2!1sja!2sjp!4v1671234567890!5m2!1sja!2sjp"
+      width="100%" 
+      height="300" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+</main>
+
+<script>
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
